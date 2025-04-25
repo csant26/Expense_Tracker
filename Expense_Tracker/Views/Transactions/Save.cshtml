@@ -1,0 +1,49 @@
+﻿@model Expense_Tracker.Models.Transaction
+
+@{
+    ViewData["Title"] = "TransactionSave";
+}
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="widget p-5">
+            <form asp-action="Save">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="TransactionId" value="@Model.TransactionId" />
+                <div class="mb-3">
+                    <ejs-datetimepicker ejs-for="TransactionDate" id="transactiondate" placeholder="Transaction Date" floatLabelType="Always"></ejs-datetimepicker>
+                    <span asp-validation-for="TransactionDate" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <ejs-dropdownlist ejs-for="CategoryId" id="categoryId" dataSource="@ViewBag.Categories"
+                                      placeholder="Category"  floatLabelType="Always">
+                        <e-dropdownlist-fields text="TitleWIcon" value="CategoryId"></e-dropdownlist-fields>
+                    </ejs-dropdownlist>
+                </div>
+                <div class="mb-3">
+                    <ejs-numerictextbox ejs-for="Amount" id="amount" Type="text" placeholder="Amount" floatLabelType="Always"></ejs-numerictextbox>
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <ejs-textbox ejs-for="Note" id="note" placeholder="Note" floatLabelType="Always"></ejs-textbox>
+                    <span asp-validation-for="Note" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <ejs-button id="submit" style="background-color:#da3916;border:1px solid #f23b13;color:#12161d;" content="Save"></ejs-button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div class="col-md-5">
+        <div class="widget h-100 d-flex justify-content-center align-items-center" style="background-color:#212b36;">
+            <i class="fa-solid fa-shapes"></i>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

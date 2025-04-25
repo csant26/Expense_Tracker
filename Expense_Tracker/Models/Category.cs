@@ -19,6 +19,7 @@ namespace Expense_Tracker.Models
         { get
             {
                 return this.Icon + this.Title;
-            } }
+            }
+        }
     }
 }

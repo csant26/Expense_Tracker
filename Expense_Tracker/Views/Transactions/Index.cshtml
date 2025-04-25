@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Expense_Tracker.Models.Transaction>
+
+@{
+    ViewData["Title"] = "TransactionIndex";
+}
+
+<div class="row">
+    <div class="col-md-7">
+        <ejs-grid id="Grid" dataSource="@Model">
+            <e-grid-columns>
+                <e-grid-column field="Category" headerText="Category"></e-grid-column>
+                <e-grid-column field="Transaction" headerText="Transaction"></e-grid-column>
+                <e-grid-column field="TransactionDate" headerText="Date" format="yMd"></e-grid-column>
+                <e-grid-column headerText="Action" template="actionTemplate"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+    <div class="col-md-5">
+        <div class="widget h-100 d-flex justify-content-center align-items-center" style="background-color:#212b36;">
+            <i class="fa-solid fa-shapes"></i>
+        </div>
+    </div>
+</div>
+<script id="actionTemplate" type="text/x-template">
+    <div class="d-flex justify-content-center align-items-center">
+        <div>
+         <a class="btn btn-sm" href="/Transaction/Save/${TransactionId}">
+             <i class="fa-solid fa-pen fa-lg" style="color:white;"></i>
+         </a>
+        </div>
+        <div>
+            <form method="post" action="/Transaction/Delete/${TransactionId}">
+    @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-sm btn-link no-a-decoration"
+                onclick="return confirm(&quot;Are you sure you want to delete this?&quot;)">
+                <i class="fa-solid fa-trash-can fa-lg" style="color:red"></i>
+                </button>
+             </form>
+        </div>
+    </div>
+</script>
