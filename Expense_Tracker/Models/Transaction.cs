@@ -7,6 +7,7 @@ namespace Expense_Tracker.Models
     {
         [Key]
         public int TransactionId { get; set; }
+        [Range(1,int.MaxValue, ErrorMessage = "Please Select a Category.")]
         public int CategoryId { get; set; } //Foreign Key
         [ForeignKey("CategoryId")]
         public Category? Category { get; set; }
