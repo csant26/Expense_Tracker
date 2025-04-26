@@ -103,6 +103,13 @@ namespace Expense_Tracker.Controllers
                                           expense = expense == null ? 0 : expense.expense
                                       };
 
+            //Recent Transactions
+            ViewBag.RecentTransactions = context.Transactions
+                .OrderByDescending(x=>x.TransactionDate)
+                .Take(5)
+                .ToList();
+
+
             return View();
         }
     }

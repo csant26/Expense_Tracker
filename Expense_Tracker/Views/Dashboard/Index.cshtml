@@ -74,7 +74,8 @@
             </div>
             <ejs-chart id="splinechart" background="#1a222b"
                        palettes=@(new string[]{"#54ffa9","#ffe91a"})>
-
+                <e-chart-legendsettings position="Top"></e-chart-legendsettings>
+                <e-chart-tooltipsettings enable shared></e-chart-tooltipsettings>
                 <e-chart-primaryxaxis valueType="Category">
                     <e-majorgridlines width="0"></e-majorgridlines>
                 </e-chart-primaryxaxis>
@@ -93,6 +94,29 @@
                               yName="expense" name="Expense" type="@Syncfusion.EJ2.Charts.ChartSeriesType.Spline"></e-series>
                 </e-series-collection>
             </ejs-chart>
+        </div>
+    </div>
+</div>
+
+
+@* Recent Transactions *@
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="p-4">
+                <h5 class="fw-bold text-center">Recent Transactions</h5>
+            </div>
+            <div class="p-4">
+                <ejs-grid id="recentTransactions"
+                          dataSource="@ViewBag.RecentTransactions">
+                    <e-grid-columns>
+                        <e-grid-column field="Category.TitleWIcon" textAlign="Center" headerText="Category"></e-grid-column>
+                        <e-grid-column field="TransactionDate" textAlign="Center" headerText="Date" format="yMd"></e-grid-column>
+                        <e-grid-column field="Amount" textAlign="Center" headerText="Amount"></e-grid-column>
+                    </e-grid-columns>
+                </ejs-grid>
+            </div>
         </div>
     </div>
 </div>
