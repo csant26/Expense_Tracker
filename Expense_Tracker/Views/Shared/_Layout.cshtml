@@ -20,54 +20,64 @@
             border: 1px solid white;
             box-shadow: none !important;
         }
-        label.e-btn{
-            background-color:rgb(34 43 51);
+
+        label.e-btn {
+            background-color: rgb(34 43 51);
         }
     </style>
 </head>
 <body class="e-bigger">
+
+    <partial name="_SideBar" />
+
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3 justify-content-center" style="background-color:#12161d;">
-            <div>
-                <div class='e-btn-group'>
-                    <input type="radio" id="radiocategory" name="Type" value="Category" onclick="location.href='/Categories/'"/>
-                    <label class="e-btn" for="radiocategory" >Category</label>
-                    <input type="radio" id="radiotxn" name="Type" value="Transaction" onclick="location.href='/Transactions/'"/>
-                    <label class="e-btn" for="radiotxn">Transaction</label>
+            @if (ViewBag.Title != "DashboardIndex")
+            {
+                <div>
+                    <div class='e-btn-group'>
+                        <input type="radio" id="radiocategory" name="Type" value="Category" onclick="location.href='/Categories/'" />
+                        <label class="e-btn" for="radiocategory">Category</label>
+                        <input type="radio" id="radiotxn" name="Type" value="Transaction" onclick="location.href='/Transactions/'" />
+                        <label class="e-btn" for="radiotxn">Transaction</label>
+                    </div>
                 </div>
-            </div>
+            }
         </nav>
     </header>
-    <div class="container mt-5">
+    <div class="container mt-5" style="margin-left:270px;">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="@(ViewBag.Title=="DashboardIndex"?"col-md-12":"col-md-10")">
                 <main role="main" class="pb-3">
-                    @if (ViewData["Title"] == "CategoryIndex")
+                    @if (ViewBag.Title != "DashboardIndex")
                     {
-                        <div class="row mb-3">
-                            <div class="col-md-7">
-                                <h3 class="fw-bold">Categories</h3>
+                        @if (ViewData["Title"] == "CategoryIndex")
+                        {
+                            <div class="row mb-3">
+                                <div class="col-md-7">
+                                    <h3 class="fw-bold">Categories</h3>
+                                </div>
+                                <div class="col-md-5">
+                                    <a class="btn" href="/Categories/Save" style="background-color:#cf12c3; color:#12161d;">+ Add New Category</a>
+                                </div>
                             </div>
-                            <div class="col-md-5">
-                                <a class="btn" href="/Categories/Save" style="background-color:#cf12c3; color:#12161d;">+ Add New Category</a>
+                        }
+                        @if (ViewData["Title"] == "TransactionIndex")
+                        {
+                            <div class="row mb-3">
+                                <div class="col-md-7">
+                                    <h3 class="fw-bold">Transactions</h3>
+                                </div>
+                                <div class="col-md-5">
+                                    <a class="btn" href="/Transactions/Save" style="background-color:#cf12c3; color:#12161d;">+ Add New Transaction</a>
+                                </div>
                             </div>
-                        </div>
+                        }
+                        <ejs-breadcrumb id="breadcrumb"
+                                        separatorTemplate="@Html.Raw("<span class='fa-solid fa-angle-right'></span>")"
+                                        class="mb-3"></ejs-breadcrumb>
+
                     }
-                    @if (ViewData["Title"] == "TransactionIndex")
-                    {
-                        <div class="row mb-3">
-                            <div class="col-md-7">
-                                <h3 class="fw-bold">Transactions</h3>
-                            </div>
-                            <div class="col-md-5">
-                                <a class="btn" href="/Transactions/Save"  style="background-color:#cf12c3; color:#12161d;">+ Add New Transaction</a>
-                            </div>
-                        </div>
-                    }
-                    <ejs-breadcrumb id="breadcrumb" 
-                    separatorTemplate="@Html.Raw("<span class='fa-solid fa-angle-right'></span>")"
-                    class="mb-3"
-                    ></ejs-breadcrumb>
                     @RenderBody()
                 </main>
             </div>
